@@ -1,4 +1,4 @@
-import { Hourglass } from "lucide-react";
+import { BadgeDollarSign, Boxes, Home, Hourglass, LayoutDashboard, Truck, Users, UtensilsCrossed } from "lucide-react";
 
 interface SideBarNavItem {
     id: number,
@@ -12,30 +12,36 @@ export const sideBarNavLinks: SideBarNavItem[] = [
         id: 1,
         title: "Home",
         directory: "/",
-        icon: <Hourglass />
+        icon: <Home />
     },
     {
         id: 2,
         title: "Dashboard",
         directory: "/dashboard",
-        icon: <Hourglass />
+        icon: <LayoutDashboard />
     },
     {
         id: 3,
-        title: "Menu",
+        title: "Menus",
         directory: "/menu",
-        icon: <Hourglass />
+        icon: <UtensilsCrossed />
     },
     {
         id: 4,
-        title: "Financial",
-        directory: "/financial",
-        icon: <Hourglass />
+        title: "Employees",
+        directory: "/employees",
+        icon: <Users />
     },
     {
         id: 5,
         title: "Inventory",
         directory: "/inventory",
-        icon: <Hourglass />
+        icon: <Boxes />
+    },
+    {
+        id: 6,
+        title: "Orders",
+        directory: "/orders",
+        icon: <Truck />
     },
 ]
