@@ -1,17 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const counterSlice = createSlice({
+export const expandSlice = createSlice({
     name: 'expand',
     initialState: {
         expand: true
     },
     reducers: {
         setExpand: (state) => {
-            state.expand = false;
+            state.expand = !state.expand;
         },
     }
 })
 
-export const { setExpand } = counterSlice.actions
+export const { setExpand } = expandSlice.actions
 
-export default counterSlice.reducer;
+export default expandSlice.reducer;
