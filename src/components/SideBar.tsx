@@ -9,8 +9,8 @@ import { setExpand } from '@/redux/features/expand/expandSlice'
 
 const SideBar = () => {
   return (
-    <aside className='h-screen'>
-      <nav className='h-full flex flex-col shadow-sm'>
+    <aside className='h-screen bg-main-dark'>
+      <nav className='h-full flex flex-col shadow-sm '>
         <SideBarNavHeader />
         <SideBarNavList />
         <SideBarNavFooter />
@@ -31,7 +31,7 @@ const SideBarNavHeader = () => {
   // console.log(`SideBarNavHeader: ${expand}`)
   
   return (
-    <div className='p-4 pb-2 flex justify-between items-center'>
+    <div className='p-4 pb-2 flex justify-between items-center bg-main-dark'>
       <img 
         src="https://img.logoipsum.com/243.svg" 
         alt=""
@@ -63,32 +63,44 @@ const SideBarNavList = () => {
 
   return (
     <>
-      <ul className='flex-1 pl-3'>
+      <ul className='flex-1 pl-1 bg-main_dark'>
 
         {sideBarNavLinks.map((link) => (
           <li 
             key={link.id}
+            className=''
           >
             <Link
               to={link.directory}
               className={`
-                relative flex items-center py-2 px-3 my-2
-                font-medium rounded-l-xl cursor-pointer
+                relative flex items-center justify-center py-2.5 my-1 font-medium rounded-l-xl cursor-pointer
                 transition-colors group
-                ${activeLink === link.directory 
-                  ? 'bg-indigo-100 text-indigo-800' 
-                  : 'hover:bg-indigo-50 text-gray-600'}
+                ${
+                  activeLink === link.directory 
+                  ? 'bg-sub-dark' 
+                  : 'text-gray-300'
+                }
               `}
               onClick={() => handleLinkClick(link.directory)}
             >
+
+              <div className={`
+                flex items-center p-3 rounded-lg
+                ${
+                  activeLink === link.directory
+                  ? 'bg-indigo-800 text-indigo-50 shadow-xl'
+                  : 'hover:bg-indigo-200 text-gray-500 hover:text-gray-700' 
+                }
+              `}>
                 {link.icon}
                 <span 
-                  className={`overflow-hidden transition-all ${
-                    expand ? "w-52 ml-3" : "w-0"
+                  className={`overflow-hidden transition-all font-bold  ${
+                    expand ? "w-40 ml-3" : "w-0"
                   }`}
                 >
                   {link.title}
-                </span> 
+                </span>
+              </div>
             </Link>
             
             {/* TOOLTIP LABEL */}
@@ -134,10 +146,10 @@ const SideBarNavFooter = () => {
       `}
       >
         <div className="leading-4">
-          <h4 className="font-semibold">John Doe</h4>
-          <span className="text-xs text-gray-600">johndoe@gmail.com</span>
+          <h4 className="font-semibold text-gray-50">John Doe</h4>
+          <span className="text-xs text-gray-400">johndoe@gmail.com</span>
         </div>
-        <MoreVertical size={20} />
+        <MoreVertical size={20} color='white' />
       </div>
     </div>
   )
