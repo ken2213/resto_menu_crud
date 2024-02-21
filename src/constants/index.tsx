@@ -45,3 +45,47 @@ export const sideBarNavLinks: SideBarNavItem[] = [
         icon: <Truck size={20} />
     },
 ]
+
+
+
+
+
+export type Option = 'small' | 'medium' | 'large';
+
+export interface FoodItem {
+    category: string;
+    name: string;
+    options?: Option[];
+    price: number;
+    cost: number;
+    amountInStock: number;
+}
+
+export const FoodItems: FoodItem[] = [
+    {
+        category: 'Entree',
+        name: 'Krabby Patty',
+        options: ['small', 'medium', 'large'],
+        price: 3.99,
+        cost: 1.75,
+        amountInStock: 200
+    },
+    {
+        category: 'Beverages',
+        name: 'Kelp Shake',
+        options: ['small', 'medium', 'large'],
+        price: 2.49,
+        cost: 0.75,
+        amountInStock: 150
+    },
+    {
+        category: 'Snack',
+        name: 'Coral Bits',
+        options: ['small', 'medium', 'large'],
+        price: 1.49,
+        cost: 0.50,
+        amountInStock: 100
+    },
+]
+
+console.log(FoodItems)
