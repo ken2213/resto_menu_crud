@@ -91,5 +91,3 @@ export const FoodItems: FoodItem[] = [
         image: coralBits,
     },
 ]
-
-console.log(FoodItems)
