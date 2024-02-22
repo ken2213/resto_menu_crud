@@ -9,7 +9,7 @@ import { setExpand } from '@/redux/features/expand/expandSlice'
 
 const SideBar = () => {
   return (
-    <aside className='h-screen bg-main-dark'>
+    <aside className='fixed h-screen bg-main-dark'>
       <nav className='h-full flex flex-col shadow-sm '>
         <SideBarNavHeader />
         <SideBarNavList />
@@ -104,7 +104,7 @@ const SideBarNavList = () => {
             </Link>
             
             {/* TOOLTIP LABEL */}
-            {!expand && (
+            {/* {!expand && (
               <div
                 className={`
                   absolute left-full rounded-md px-2 py-1 ml-6
@@ -117,7 +117,7 @@ const SideBarNavList = () => {
               > 
                 {link.title}
               </div>
-            )}
+            )} */}
           </li>
         ))}
 
