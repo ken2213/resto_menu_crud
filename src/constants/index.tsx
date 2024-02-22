@@ -1,5 +1,7 @@
 import { BadgeDollarSign, Boxes, Home, Hourglass, LayoutDashboard, Truck, Users, UtensilsCrossed } from "lucide-react";
 
+import { coralBits, kelpShake, krabbyPatty } from "@/assets/food";
+
 interface SideBarNavItem {
     id: number,
     title: string,
@@ -48,8 +50,6 @@ export const sideBarNavLinks: SideBarNavItem[] = [
 
 
 
-
-
 export type Option = 'small' | 'medium' | 'large';
 
 export interface FoodItem {
@@ -59,6 +59,7 @@ export interface FoodItem {
     price: number;
     cost: number;
     amountInStock: number;
+    image: string
 }
 
 export const FoodItems: FoodItem[] = [
@@ -68,7 +69,8 @@ export const FoodItems: FoodItem[] = [
         options: ['small', 'medium', 'large'],
         price: 3.99,
         cost: 1.75,
-        amountInStock: 200
+        amountInStock: 200,
+        image: krabbyPatty
     },
     {
         category: 'Beverages',
@@ -76,15 +78,17 @@ export const FoodItems: FoodItem[] = [
         options: ['small', 'medium', 'large'],
         price: 2.49,
         cost: 0.75,
-        amountInStock: 150
+        amountInStock: 150,
+        image: kelpShake
     },
     {
         category: 'Snack',
         name: 'Coral Bits',
-        options: ['small', 'medium', 'large'],
+        options: ['small', 'medium'],
         price: 1.49,
         cost: 0.50,
-        amountInStock: 100
+        amountInStock: 100,
+        image: coralBits,
     },
 ]
 
