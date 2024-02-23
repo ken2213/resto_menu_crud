@@ -1,0 +1,41 @@
+UTAK React Developer Test
+
+Utak is a software company helping small businesses in the Philippines expand and grow as we
+believe Small businesses are the backbone of the economy and contribute most to job creation.
+
+Our main product is a point of sale system and a shopify type website we give to our merchants.
+
+Going to utak.io and signing up will give access to the existing React webapp, and downloading utak pos from the play or app store gives access to the Point of Sale system.
+
+
+You will be assessed for:
+1. Modern and clean design of the UI and ease of use for the merchant
+2. Use of React properly
+3. Organised code that is easy to read, apply prettier etc
+4. How you structure the data in Firebase
+5. Any initiative that you show
+
+
+Simple CRUD for Menu
+A restaurant needs to keep track of its sales. Code 1 page in React where the merchant can create all the items in their menu and save them, these can be edited later.
+
+Use Firebase Realtime Database to save the created items. You can use any npm packages you want. 
+
+Use hooks rather than class components. How you design the UI should be the most user friendly experience you can think of.
+
+
+Items will have:
+● A Category
+● A Name
+● Some of them should have the ability to have options e.g. Fries - Small, Medium, Large
+● Price
+● A Cost
+● Amount in stock
+
+
+How to Submit
+Please make a public repo on your Github and publish the link using Vercel or the equivalent to a url.
+
+Please then email me the link to the website and the repo at afra@utak.ph . 
+
+Please also send access to your Firebase project in the email so I can see how you have structured the data.
