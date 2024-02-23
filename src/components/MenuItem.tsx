@@ -9,7 +9,7 @@ import {
 
 import { FoodItem } from '@/constants';
 
-import { HandCoins, Tag, PackageOpen } from 'lucide-react';
+import { HandCoins, Tag, PackageOpen, Dot } from 'lucide-react';
 
 const MenuItem = ({ foodItem }: { foodItem: FoodItem }) => {
   return (
@@ -33,9 +33,12 @@ const MenuItem = ({ foodItem }: { foodItem: FoodItem }) => {
                 {/* Food Item Name and Category */}
                 <div className='pt-3 pb-2'>
                     <CardTitle 
-                        className='tracking-wide font-extrabold'
+                        className='tracking-wide font-extrabold flex justify-center'
                     >
+                        <Dot className='text-gray-700' />
                         {foodItem.name}
+                        <Dot className='text-gray-700'
+                        />
                     </CardTitle>
                     <CardDescription
                         className='text-md font-semibold'
