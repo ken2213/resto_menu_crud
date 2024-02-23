@@ -1,6 +1,6 @@
 import { BadgeDollarSign, Boxes, Home, Hourglass, LayoutDashboard, Truck, Users, UtensilsCrossed } from "lucide-react";
 
-import { coralBits, kelpShake, krabbyPatty } from "@/assets/food";
+import { barnacleChips, cannedBread, coralBits, exploadingPie, goofyGooberSundae, jellyPatty, kelpJerky, kelpShake, krabbyPatty, krustyKrabPizza, nastyPatty, prettyPatty, salad } from "@/assets/food";
 
 interface SideBarNavItem {
     id: number,
@@ -64,7 +64,7 @@ export interface FoodItem {
 
 export const FoodItems: FoodItem[] = [
     {
-        category: 'Entree',
+        category: 'entree',
         name: 'Krabby Patty',
         options: ['small', 'medium', 'large'],
         price: 3.99,
@@ -73,7 +73,7 @@ export const FoodItems: FoodItem[] = [
         image: krabbyPatty
     },
     {
-        category: 'Beverages',
+        category: 'beverages',
         name: 'Kelp Shake',
         options: ['small', 'medium', 'large'],
         price: 2.49,
@@ -82,7 +82,16 @@ export const FoodItems: FoodItem[] = [
         image: kelpShake
     },
     {
-        category: 'Snack',
+        category: 'snack',
+        name: 'Canned Bread',
+        options: ['small', 'medium', 'large'],
+        price: 2,
+        cost: 0.5,
+        amountInStock: 200,
+        image: cannedBread,
+    },
+    {
+        category: 'snack',
         name: 'Coral Bits',
         options: ['small', 'medium'],
         price: 1.49,
@@ -90,4 +99,86 @@ export const FoodItems: FoodItem[] = [
         amountInStock: 100,
         image: coralBits,
     },
+    {
+        category: 'entree',
+        name: 'Krusty Krab Pizza',
+        options: ['small', 'medium', 'large'],
+        price: 4.99,
+        cost: 2.25,
+        amountInStock: 180,
+        image: krustyKrabPizza,
+    },
+    {
+        category: 'entree',
+        name: 'Nasty Patty',
+        options: ['small', 'medium', 'large'],
+        price: 1,
+        cost: 0.5,
+        amountInStock: 80,
+        image: nastyPatty,
+    },
+    {
+        category: 'snack',
+        name: 'Kelp Jerky',
+        options: ['small', 'medium', 'large'],
+        price: 2,
+        cost: 0.5,
+        amountInStock: 200,
+        image: kelpJerky,
+    },
+    {
+        category: 'entree',
+        name: 'Pretty Patty',
+        options: ['small', 'medium', 'large'],
+        price: 3.49,
+        cost: 1.50,
+        amountInStock: 120,
+        image: prettyPatty,
+    },
+    {
+        category: 'entree',
+        name: 'Jelly Patty',
+        options: ['small', 'medium', 'large'],
+        price: 2.99,
+        cost: 1.25,
+        amountInStock: 200,
+        image: jellyPatty,
+    },
+    {
+        category: 'dessert',
+        name: 'Goofy Goober Sundae',
+        options: ['small', 'medium', 'large'],
+        price: 3.79,
+        cost: 1.50,
+        amountInStock: 100,
+        image: goofyGooberSundae,
+    },
+    {
+        category: 'snack',
+        name: 'Barnacle Chips',
+        options: ['small', 'medium', 'large'],
+        price: 1.99,
+        cost: 0.75,
+        amountInStock: 100,
+        image: barnacleChips,
+    },
+    {
+        category: 'salad',
+        name: 'Salad',
+        options: ['small', 'medium'],
+        price: 3.99,
+        cost: 1.75,
+        amountInStock: 80,
+        image: salad,
+    },
+    {
+        category: 'desert',
+        name: 'Exploding Pie',
+        options: ['small', 'medium', 'large'],
+        price: 20.99,
+        cost: 3.75,
+        amountInStock: 80,
+        image: exploadingPie,
+    },
+    
 ]
