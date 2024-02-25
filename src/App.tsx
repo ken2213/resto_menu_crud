@@ -18,7 +18,7 @@ const App = () => {
     <div className="h-screen flex flex-col justify-between">
       <div className="flex flex-row w-full">
         <SideBar />
-        <div className="container bg-sub-dark text-indigo-50">
+        <div className="container min-h-screen bg-sub-dark text-indigo-50">
           <Routes>
             <Route path="/" element={<Home />} index />
             <Route path="/dashboard" element={<Dashboard />} />
