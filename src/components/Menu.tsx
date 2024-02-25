@@ -10,15 +10,18 @@ import {
 const Menu = () => {
   return (
     <>
-      <div className="w-full">
-        <h1 className="text-[2rem] font-bold">MENU ITEM</h1>
+      <div className="w-full flex justify-center bg-red-900">
+        <div className="w-[350px] sm:w-[560px] md:w-[690px] lg:w-[940px] xl:w-[1100px] 2xl:w-[1350px] bg-orange-900">
+          <h1 className="text-[2rem] sm:text-[3.5rem] md:text-[4rem] lg:text-[4.5rem] font-bold px-10">MENU MANAGER</h1>
+        </div>
+
       </div>
 
       <div className="w-full flex justify-center">
         {/* GRID CONTAINER */}
         <div 
           className="
-            overflow-y-auto sm:w-[560px] md:w-[690px] lg:w-[940px] xl:w-[1300px] 2xl:w-[1350px]
+            overflow-y-auto sm:w-[560px] md:w-[690px] lg:w-[940px] xl:w-[1200px] 2xl:w-[1350px]
             "
         >
           {/* GRID */}
