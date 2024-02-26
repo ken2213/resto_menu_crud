@@ -135,9 +135,9 @@ const SideBarNavFooter = () => {
   return (
     <div className="border-t flex p-3">
       <img
-        src="https://ui-avatars.com/api/?background=c7d2fe&color=3730a3&bold=true"
+        src="https://i.pinimg.com/736x/86/8b/0b/868b0b9025c02ef1b7b3ea97101b745e.jpg"
         alt=""
-        className="w-10 h-10 rounded-md"
+        className="w-10 h-10 rounded-md object-cover"
       />
       <div
         className={`
@@ -146,8 +146,8 @@ const SideBarNavFooter = () => {
       `}
       >
         <div className="leading-4">
-          <h4 className="font-semibold text-gray-50">John Doe</h4>
-          <span className="text-xs text-gray-400">johndoe@gmail.com</span>
+          <h4 className="font-semibold text-gray-50">Squidward Tentacles</h4>
+          <span className="text-xs text-gray-400">squidward@krustykrab.com</span>
         </div>
         <MoreVertical size={20} color='white' />
       </div>
