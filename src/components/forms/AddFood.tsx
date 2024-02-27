@@ -7,6 +7,7 @@ import {
     DialogHeader,
     DialogTitle,
 } from "../ui/dialog";
+
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 
@@ -33,6 +34,11 @@ import {
     SelectTrigger,
     SelectValue,
  } from "../ui/select";
+
+import { ref, set, child } from "firebase/database";
+import FirebaseConfig from "@/config/firebase";
+
+import { v4 as uuidv4 } from 'uuid';
 
 const formSchema = z.object({
     name: z.string().min(3, {
@@ -62,7 +68,35 @@ export function AddFoodForm() {
 
     // 2. Define a submit handler
     function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values)
+        const database = FirebaseConfig(); // Initialize Firebase
+        const dbRef = ref(database, 'foodItems');
+
+        const foodId = uuidv4()
+
+        // Generate client-side timestamp
+        const clientTimestamp = Date.now();
+
+        // Convert timestamp to a readable date format
+        const readableTimestamp = new Date(clientTimestamp).toLocaleString();
+
+        // Include the timestamp in the food data
+        const foodDataWithTimestamp = {
+            ...values,
+            __timestamp: readableTimestamp
+        }
+
+        try{
+            set(child(dbRef, foodId), foodDataWithTimestamp)
+                .then(() => {
+                    console.log("Form data submitted successfully");
+                    form.reset()
+                })
+                .catch((error) => {
+                    console.error("Error submitting form data", error)
+                })
+        } catch (error) {
+            console.error("Error initializing Firebase:", error);
+        }
     }
 
     return (
@@ -205,10 +239,10 @@ export function AddFoodForm() {
                     />
 
                     <DialogFooter>
-                        <DialogClose disabled={!form.formState.isValid}>
+                        <DialogClose disabled={!form.formState.isValid || !form.formState.isDirty}>
                             <Button 
                                 type="submit"
-                                disabled={!form.formState.isValid}
+                                disabled={!form.formState.isValid || !form.formState.isDirty}
                             >
                                 Submit
                             </Button>
