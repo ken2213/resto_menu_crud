@@ -1,0 +1,221 @@
+import { Button } from "../ui/button";
+import { 
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+} from "../ui/dialog";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+
+import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+
+import { 
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage
+} from "../ui/form";
+
+import { 
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
+ } from "../ui/select";
+
+const formSchema = z.object({
+    name: z.string().min(3, {
+        message: "Food name must be atleast 3 characters.",
+    }),
+    category: z.string().min(1, {
+        message: "Please select 1 category"
+    }),
+    cost: z.coerce.number(),
+    price: z.coerce.number(),
+    stocks: z.coerce.number(),
+})
+
+export function AddFoodForm() {
+
+    // 1. Define your form
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            name: "",
+            category: "",
+            cost: 1,
+            price: 1,
+            stocks: 0
+        },
+    })
+
+    // 2. Define a submit handler
+    function onSubmit(values: z.infer<typeof formSchema>) {
+        console.log(values)
+    }
+
+    return (
+        
+        <DialogContent className="sm:max-w-[425px] max-h-[600px] overflow-y-auto bg-main-dark text-gray-50 border-sub-dark">
+            <DialogHeader>
+                <DialogTitle>Add New Food</DialogTitle>
+                <DialogDescription className="text-gray-300">
+                    This form lets you to add a new food on your menu...
+                </DialogDescription>
+            </DialogHeader>
+
+            <Form {...form}>
+                <form 
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="space-y-8"
+                    id="uniqueFormId"
+                >
+                    {/* Food Name Form Field */}
+                    <FormField
+                        control={form.control}
+                        name="name"
+                        render={({ field }) => (
+                            /* Food Name */
+                            <FormItem>
+                                <FormLabel>Food Name</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        className="bg-sub-dark border-gray-400"
+                                        placeholder="ex. Pancit Bihon"
+                                        {...field} 
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    {/* Food Category Form Field */}
+                    <FormField 
+                        control={form.control}
+                        name="category"
+                        render={({ field }) => (
+                            /* Food Category */
+                            <FormItem>
+                                <FormLabel>Category</FormLabel>
+                                <FormControl>
+                                    <Select onValueChange={field.onChange}>
+                                        <SelectTrigger className="w-full bg-sub-dark">
+                                            <SelectValue 
+                                                placeholder="Choose a category"
+                                                className="bg-sub-dark" 
+                                            />
+                                        </SelectTrigger>
+
+                                        <SelectContent className="bg-sub-dark">
+                                            <SelectGroup className="bg-sub-dark text-gray-50">
+                                                <SelectItem value="entree">Entree</SelectItem>
+                                                <SelectItem value="beverages">Beverages</SelectItem>
+                                                <SelectItem value="snack">Snack</SelectItem>
+                                                <SelectItem value="dessert">Dessert</SelectItem>
+                                                <SelectItem value="salad">Salad</SelectItem>
+                                            </SelectGroup>
+                                        </SelectContent>
+
+                                    </Select>
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    {/* Food Cost Form Field */}
+                    <FormField
+                        control={form.control}
+                        name="cost"
+                        render={({ field }) => (
+                            /* Food Cost */
+                            <FormItem>
+                                <FormLabel>Food Cost</FormLabel>
+
+                                <Input
+                                    type="number"
+                                    className="bg-sub-dark border-gray-400"
+                                    placeholder="12" 
+                                    {...field}
+                                />
+                                <FormDescription>
+                                    Enter how much the manufacturing cost of food.
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    {/* Food Price Form Field */}
+                    <FormField
+                        control={form.control}
+                        name="price"
+                        render={({ field }) => (
+                            /* Food Cost */
+                            <FormItem>
+                                <FormLabel>Food Price</FormLabel>
+
+                                <Input
+                                    type="number"
+                                    className="bg-sub-dark border-gray-400"
+                                    placeholder="12" 
+                                    {...field} 
+                                />
+                                <FormDescription>
+                                    Enter price of food.
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    {/* Food Stocks Form Field */}
+                    <FormField 
+                        control={form.control}
+                        name="stocks"
+                        render={({ field }) => (
+                            /* Food Stocks */
+                            <FormItem>
+                                <FormLabel>Food Stocks</FormLabel>
+
+                                <Input 
+                                    type="number"
+                                    className="bg-sub-dark border-gray-400"
+                                    placeholder="12"
+                                    {...field}
+                                />
+                                <FormDescription>
+                                    Enter stocks available
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    <DialogFooter>
+                        <DialogClose disabled={!form.formState.isValid}>
+                            <Button 
+                                type="submit"
+                                disabled={!form.formState.isValid}
+                            >
+                                Submit
+                            </Button>
+                        </DialogClose>
+                    </DialogFooter>
+                </form>
+            </Form>
+        </DialogContent>
+    )
+}
