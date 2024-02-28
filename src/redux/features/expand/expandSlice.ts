@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const expandSlice = createSlice({
     name: 'expand',
     initialState: {
-        expand: true
+        expand: false
     },
     reducers: {
         setExpand: (state) => {
