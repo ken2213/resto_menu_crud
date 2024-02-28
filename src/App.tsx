@@ -4,7 +4,6 @@ import {
   Dashboard,
   Employees,
   Financial,
-  Footer,
   Home,
   Inventory,
   Menu,

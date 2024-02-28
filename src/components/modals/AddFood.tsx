@@ -9,7 +9,6 @@ import {
 } from "../ui/dialog";
 
 import { Input } from "../ui/input";
-import { Label } from "../ui/label";
 
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -30,7 +29,6 @@ import {
     SelectContent,
     SelectGroup,
     SelectItem,
-    SelectLabel,
     SelectTrigger,
     SelectValue,
  } from "../ui/select";

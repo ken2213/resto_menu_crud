@@ -1,8 +1,6 @@
-import { FoodItem } from "@/constants";
 import { HandCoins, Tag, PackageOpen, Trash, Pen } from "lucide-react";
-import { SheetContent, SheetDescription, SheetHeader, SheetTitle } from "./ui/sheet";
+import { SheetContent, SheetHeader } from "./ui/sheet";
 import { Button } from "./ui/button";
-import { Badge } from "./ui/badge";
 import { FoodInterface } from "@/types";
 import { Dialog, DialogTrigger } from "./ui/dialog";
 import EditFoodForm from "./modals/EditFood"; 

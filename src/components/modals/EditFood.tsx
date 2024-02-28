@@ -1,4 +1,3 @@
-import React from 'react'
 import { DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '../ui/dialog'
 import { FoodInterface } from '@/types'
 import { z } from 'zod'

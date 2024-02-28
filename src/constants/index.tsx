@@ -1,4 +1,4 @@
-import { BadgeDollarSign, Boxes, Home, Hourglass, LayoutDashboard, Truck, Users, UtensilsCrossed } from "lucide-react";
+import { Boxes, Home, LayoutDashboard, Truck, Users, UtensilsCrossed } from "lucide-react";
 
 import { barnacleChips, cannedBread, coralBits, exploadingPie, goofyGooberSundae, jellyPatty, kelpJerky, kelpShake, krabbyPatty, krustyKrabPizza, nastyPatty, prettyPatty, salad } from "@/assets/food";
 
