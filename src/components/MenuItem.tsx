@@ -7,11 +7,12 @@ import {
     CardTitle
 } from './ui/card'
 
-import { FoodItem } from '@/constants';
+// import { FoodItem } from '@/constants';
+import { FoodInterface } from '@/types';
 
 import { HandCoins, Tag, PackageOpen, Dot } from 'lucide-react';
 
-const MenuItem = ({ foodItem }: { foodItem: FoodItem }) => {
+const MenuItem = ({ food }: { food: FoodInterface }) => {
   return (
     <>
         <Card
@@ -21,9 +22,10 @@ const MenuItem = ({ foodItem }: { foodItem: FoodItem }) => {
                 {/* Food Item Image */}
                 <div className='w-full'>
                     <img 
-                        src={foodItem.image}
-                        alt={`Maybe an image of ${foodItem.image}`}
-                        title={`${foodItem.name}'s image`}
+                        // src={food.image}
+                        src='https://honehealth.com/wp-content/uploads/2023/06/high-protein-fast-food-1.webp'
+                        alt={`Maybe an image of ${food.name}`}
+                        title={`${food.name}'s image`}
                         className='w-full h-[200px] object-cover rounded-md'
                     />
                 </div>
@@ -36,14 +38,14 @@ const MenuItem = ({ foodItem }: { foodItem: FoodItem }) => {
                         className='tracking-wide font-extrabold flex justify-center'
                     >
                         <Dot className='text-gray-700' />
-                        {foodItem.name}
+                        {food.name}
                         <Dot className='text-gray-700'
                         />
                     </CardTitle>
                     <CardDescription
                         className='text-md font-semibold'
                     >
-                        {foodItem.category}
+                        {food.category}
                     </CardDescription>
                 </div>
 
@@ -72,7 +74,7 @@ const MenuItem = ({ foodItem }: { foodItem: FoodItem }) => {
                         <div className='font-bold'>
                             <p>
                                 <span className='text-xs text-gray-400'>$</span>
-                                {foodItem.price}
+                                {food.price}
                             </p>
                         </div>
                     </div>
@@ -96,7 +98,7 @@ const MenuItem = ({ foodItem }: { foodItem: FoodItem }) => {
                         <div className='font-bold'>
                             <p>
                                 <span className='text-xs text-gray-400'>$</span>
-                                {foodItem.cost}
+                                {food.cost}
                             </p>
                         </div>
 
@@ -120,7 +122,7 @@ const MenuItem = ({ foodItem }: { foodItem: FoodItem }) => {
 
                         <div className='font-bold'>
                             <p>
-                                {foodItem.amountInStock}
+                                {food.stocks}
                             </p>
                         </div>
                         
@@ -132,7 +134,7 @@ const MenuItem = ({ foodItem }: { foodItem: FoodItem }) => {
             <CardFooter className='flex flex-col'>
                 <p className='text-start w-full'>Available Sizes</p>
                 <div className='w-full flex'>
-                    {foodItem.options?.map((option) => (
+                    {/* {foodItem.options?.map((option) => (
                         <div 
                             className='w-6 mr-1 flex justify-center items-start rounded-full font-bold px-4 py-1 hover:bg-gray-300 hover:cursor-pointer hover:text-gray-700 hover:transition-all transition-all'
                         >
@@ -145,7 +147,7 @@ const MenuItem = ({ foodItem }: { foodItem: FoodItem }) => {
                                 {option === 'large' && 'L'}
                             </div>
                         </div>
-                    ))}
+                    ))} */}
                 </div>
             </CardFooter>
         </Card>
