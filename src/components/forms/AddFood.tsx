@@ -41,15 +41,59 @@ import FirebaseConfig from "@/config/firebase";
 import { v4 as uuidv4 } from 'uuid';
 
 const formSchema = z.object({
+    /* 
+        Validate entered data as string
+        min data set to 3 characters or else
+        it will show error message
+    */
     name: z.string().min(3, {
         message: "Food name must be atleast 3 characters.",
     }),
+
+    /*
+        Validate entered data as string
+        min data set to 1 character or else
+        it will show error message
+    */
     category: z.string().min(1, {
         message: "Please select 1 category"
     }),
-    cost: z.coerce.number(),
-    price: z.coerce.number(),
-    stocks: z.coerce.number(),
+    
+    /* 
+        Validate entered data as number
+        maximum data set to 100,000,
+        data is set to positive numbers only
+    */
+    cost: z.coerce.number({
+        required_error: "Cost is required",
+        invalid_type_error: "Cost must be a number"
+    }).lte(100000, {
+        message: "this cost is too big",
+    }).positive(),
+
+    /* 
+        Validate entered data as number
+        maximum data set to 100,000
+        data is set to positive numbers only
+    */
+    price: z.coerce.number({
+        required_error: "Price is required",
+        invalid_type_error: "Price must be a number"
+    }).lte(100000, {
+        message: "this price is too big"
+    }).positive(),
+
+    /* 
+        Validate entered data as number
+        maximum data set to 100,000
+        only from 0 to positive numbers only
+    */
+    stocks: z.coerce.number({
+        required_error: "Stock is required",
+        invalid_type_error: "Price must be a number"
+    }).lte(100000, {
+        message: "this stock is too big"
+    }).nonnegative(),
 })
 
 export function AddFoodForm() {
@@ -60,17 +104,25 @@ export function AddFoodForm() {
         defaultValues: {
             name: "",
             category: "",
-            cost: 1,
-            price: 1,
+            cost: 0,
+            price: 0,
             stocks: 0
         },
+        /* 
+            This will enable you to see error messages 
+            from validation being show on <FormMessage />
+            of shadcn/ui 
+        */
+        mode: 'onChange', 
     })
 
     // 2. Define a submit handler
     function onSubmit(values: z.infer<typeof formSchema>) {
         const database = FirebaseConfig(); // Initialize Firebase
+        // Create an object 'foodItems' on database 
         const dbRef = ref(database, 'foodItems');
 
+        // Use uuidv4 package
         const foodId = uuidv4()
 
         // Generate client-side timestamp
@@ -86,9 +138,11 @@ export function AddFoodForm() {
         }
 
         try{
+            // Write data to firebase realtime database
             set(child(dbRef, foodId), foodDataWithTimestamp)
                 .then(() => {
                     console.log("Form data submitted successfully");
+                    alert("Form data submitted successfully");
                     form.reset()
                 })
                 .catch((error) => {
@@ -147,13 +201,14 @@ export function AddFoodForm() {
                                     <Select onValueChange={field.onChange}>
                                         <SelectTrigger className="w-full bg-sub-dark">
                                             <SelectValue 
-                                                placeholder="Choose a category"
+                                                placeholder="-- Choose a category --"
                                                 className="bg-sub-dark" 
                                             />
                                         </SelectTrigger>
 
                                         <SelectContent className="bg-sub-dark">
                                             <SelectGroup className="bg-sub-dark text-gray-50">
+                                                <SelectItem value={null}>-- Choose a category --</SelectItem>
                                                 <SelectItem value="entree">Entree</SelectItem>
                                                 <SelectItem value="beverages">Beverages</SelectItem>
                                                 <SelectItem value="snack">Snack</SelectItem>
@@ -174,12 +229,11 @@ export function AddFoodForm() {
                         control={form.control}
                         name="cost"
                         render={({ field }) => (
-                            /* Food Cost */
+
                             <FormItem>
                                 <FormLabel>Food Cost</FormLabel>
 
                                 <Input
-                                    type="number"
                                     className="bg-sub-dark border-gray-400"
                                     placeholder="12" 
                                     {...field}
@@ -197,12 +251,11 @@ export function AddFoodForm() {
                         control={form.control}
                         name="price"
                         render={({ field }) => (
-                            /* Food Cost */
+
                             <FormItem>
                                 <FormLabel>Food Price</FormLabel>
 
                                 <Input
-                                    type="number"
                                     className="bg-sub-dark border-gray-400"
                                     placeholder="12" 
                                     {...field} 
@@ -220,12 +273,11 @@ export function AddFoodForm() {
                         control={form.control}
                         name="stocks"
                         render={({ field }) => (
-                            /* Food Stocks */
+
                             <FormItem>
                                 <FormLabel>Food Stocks</FormLabel>
 
                                 <Input 
-                                    type="number"
                                     className="bg-sub-dark border-gray-400"
                                     placeholder="12"
                                     {...field}
@@ -239,10 +291,12 @@ export function AddFoodForm() {
                     />
 
                     <DialogFooter>
-                        <DialogClose disabled={!form.formState.isValid || !form.formState.isDirty}>
+                        <DialogClose 
+                        disabled={!form.formState.isValid || !form.formState.dirtyFields}
+                        >
                             <Button 
                                 type="submit"
-                                disabled={!form.formState.isValid || !form.formState.isDirty}
+                                disabled={!form.formState.isValid || !form.formState.dirtyFields}
                             >
                                 Submit
                             </Button>
