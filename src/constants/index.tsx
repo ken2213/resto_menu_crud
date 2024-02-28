@@ -53,13 +53,13 @@ export const sideBarNavLinks: SideBarNavItem[] = [
 export type Option = 'small' | 'medium' | 'large';
 
 export interface FoodItem {
+    amountInStock: number;
     category: string;
+    cost: number;
+    image: string
     name: string;
     options?: Option[];
     price: number;
-    cost: number;
-    amountInStock: number;
-    image: string
 }
 
 export const FoodItems: FoodItem[] = [
@@ -172,7 +172,7 @@ export const FoodItems: FoodItem[] = [
         image: salad,
     },
     {
-        category: 'desert',
+        category: 'dessert',
         name: 'Exploding Pie',
         options: ['small', 'medium', 'large'],
         price: 20.99,
@@ -182,3 +182,25 @@ export const FoodItems: FoodItem[] = [
     },
     
 ]
+
+export interface CategoryInterface {
+    categoryTitle: string;
+}
+
+export const Categories: CategoryInterface[] = [
+    {
+        categoryTitle: "entree"
+    },
+    {
+        categoryTitle: "beverages"
+    },
+    {
+        categoryTitle: "snack"
+    },
+    {
+        categoryTitle: "dessert"
+    },
+    {
+        categoryTitle: "salad"
+    },
+] 
