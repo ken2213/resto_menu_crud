@@ -3,16 +3,21 @@ import { HandCoins, Tag, PackageOpen, Trash, Pen } from "lucide-react";
 import { SheetContent, SheetDescription, SheetHeader, SheetTitle } from "./ui/sheet";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
+import { FoodInterface } from "@/types";
+import { Dialog, DialogTrigger } from "./ui/dialog";
+import EditFoodForm from "./modals/EditFood"; 
+import { DeleteFood } from "./modals/DeleteFood";
 
-const MenuItemDetails = ({ foodItem }: { foodItem: FoodItem }) => {
+const MenuItemDetails = ({ food }: { food: FoodInterface }) => {
   return (
     <SheetContent className="bg-main-dark border-l-gray-600 pt-12 text-gray-50">
       <SheetHeader>
         {/* FOOD IMAGE */}
         <div className="w-full">
           <img 
-            src={foodItem.image} 
-            alt={foodItem.name}
+            // src={food.image}
+            src="https://honehealth.com/wp-content/uploads/2023/06/high-protein-fast-food-1.webp"
+            alt={food.name}
             className="w-full h-[280px] object-cover rounded-md shadow-2xl"
           />
         </div>
@@ -20,11 +25,11 @@ const MenuItemDetails = ({ foodItem }: { foodItem: FoodItem }) => {
         {/* FOOD NAME AND CATEGORY */}
         <div className="flex flex-col">
           <h1 className="text-[2.5rem] font-extrabold text-center tracking-wide">
-            {foodItem.name}
+            {food.name}
           </h1>
 
           <p className="text-gray-500 text-[1.2rem] text-center font-semibold">
-            {foodItem.category}
+            {food.category}
           </p>
         </div>
       </SheetHeader>
@@ -55,7 +60,7 @@ const MenuItemDetails = ({ foodItem }: { foodItem: FoodItem }) => {
             <div className='font-bold text-lg'>
                 <p>
                     <span className='text-sm text-gray-500'>$</span>
-                    {foodItem.price}
+                    {food.price}
                 </p>
             </div>
           </div>
@@ -79,7 +84,7 @@ const MenuItemDetails = ({ foodItem }: { foodItem: FoodItem }) => {
               <div className='font-bold text-lg'>
                   <p>
                       <span className='text-sm text-gray-500'>$</span>
-                      {foodItem.cost}
+                      {food.cost}
                   </p>
               </div>
 
@@ -103,7 +108,7 @@ const MenuItemDetails = ({ foodItem }: { foodItem: FoodItem }) => {
 
               <div className='font-bold text-lg'>
                   <p>
-                      {foodItem.amountInStock}
+                      {food.stocks}
                   </p>
               </div>
               
@@ -120,7 +125,7 @@ const MenuItemDetails = ({ foodItem }: { foodItem: FoodItem }) => {
         <div className='flex flex-col justify-center items-center font-semibold gap-y-4'>
           <h1 className='text-gray-200'>Available Sizes</h1>
           <div className='w-full flex justify-evenly'>
-            {foodItem.options?.map((option) => (
+            {/* {foodItem.options?.map((option) => (
                 <Badge
                     className='text-gray-300 bg-gray-700 shadow-sm hover:bg-gray-600 hover:cursor-pointer hover:text-gray-200 hover:shadow-lg  hover:transition-all transition-all py-2 px-4'
                     title={option}
@@ -131,7 +136,7 @@ const MenuItemDetails = ({ foodItem }: { foodItem: FoodItem }) => {
                       {option}
                     </div>
                 </Badge>
-            ))}
+            ))} */}
           </div>
 
         </div>
@@ -140,25 +145,37 @@ const MenuItemDetails = ({ foodItem }: { foodItem: FoodItem }) => {
 
 
       <footer className="absolute bottom-0 left-0 w-full grid grid-cols-2 gap-x-4 px-6 pb-6">
-        <Button
-          variant={"destructive"}
-          className="text-sm"
-        >
-          <Trash 
-            className="mr-2 h-4 w-4" 
-          />
-          Delete
-        </Button>
+        <Dialog>
+          <DialogTrigger>
+            <Button
+              variant={"destructive"}
+              className="text-sm"
+            >
+              <Trash 
+                className="mr-2 h-4 w-4" 
+              />
+              Delete
+            </Button>
+          </DialogTrigger>
+          <DeleteFood food={food} />
+        </Dialog>
 
-        <Button
-          variant={"default"}
-          className="text-sm bg-orange-500"
-        >
-          <Pen 
-            className="mr-2 h-4 w-4" 
-          />
-          Edit
-        </Button>
+        <Dialog>
+          <DialogTrigger>
+            <Button
+              variant={"default"}
+              className="text-sm bg-orange-500"
+            >
+              <Pen 
+                className="mr-2 h-4 w-4" 
+              />
+              Edit
+            </Button>
+            
+          </DialogTrigger>
+          <EditFoodForm food={food} />
+
+        </Dialog>
       </footer>
     </SheetContent>
   )
