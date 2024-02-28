@@ -207,7 +207,7 @@ export function AddFoodForm() {
 
                                         <SelectContent className="bg-sub-dark">
                                             <SelectGroup className="bg-sub-dark text-gray-50">
-                                                <SelectItem value="">-- Choose a category --</SelectItem>
+                                                <SelectItem value=" ">-- Choose a category --</SelectItem>
                                                 <SelectItem value="entree">Entree</SelectItem>
                                                 <SelectItem value="beverages">Beverages</SelectItem>
                                                 <SelectItem value="snack">Snack</SelectItem>
