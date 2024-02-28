@@ -1,34 +1,68 @@
 import MenuItem from "./MenuItem"
-import { FoodItem, FoodItems } from "@/constants"
 import MenuItemDetails from "./MenuItemDetails"
 
-import { 
-  Sheet,
-  SheetTrigger,
-} from "./ui/sheet"
-import { useDispatch, useSelector } from "react-redux"
-import { RootState } from "@/redux/store"
-import { setSearchQuery } from "@/redux/features/search/searchSlice"
-import Category from "./Category"
-import { PlusCircle } from "lucide-react"
+import { Sheet, SheetTrigger } from "./ui/sheet"
+import { Dialog, DialogTrigger } from "./ui/dialog"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
-import Test from "./Test"
-import { Dialog, DialogTrigger } from "./ui/dialog"
-import { AddFoodForm } from "./forms/AddFood"
+
+import { useDispatch, useSelector } from "react-redux"
+import { RootState } from "@/redux/store"
+
+import { setSearchQuery } from "@/redux/features/search/searchSlice"
+import { setFood } from "@/redux/features/food/foodSlice"
+
+import Category from "./Category"
+import { PlusCircle } from "lucide-react"
+
+import FirebaseConfig from "@/config/firebase";
+import { off, onValue, ref } from "firebase/database"
+
+import { AddFoodForm } from "./modals/AddFood"
+
+import { useEffect } from "react"
+import { FoodInterface } from "@/types"
 
 const Menu = () => {
-  const searchQuery = useSelector((state: RootState) => state.searcherQuery.searchQuery)
   const dispatch = useDispatch();
+  const foods = useSelector((state: RootState) => state.fooder.foods)
+
+  useEffect(() => {
+    // Initialize Firebase
+    const database = FirebaseConfig();
+    const dbRef = ref(database, 'foodItems');
+
+    // Retrieve data which is foods from Firebase
+    onValue(dbRef, (snapshot) => {
+      const data = snapshot.val();
+
+      if (data) {
+        // Convert the object of food items to an array
+        const foodsArray = Object.values(data);
+        // Set 'foodsArray' on state'setFood' setter variable
+        // So technically it will be stored on 'food' state variable
+        dispatch(setFood(foodsArray))
+      }
+    })
+
+    // Clean up the listener when the component unmounts
+    return () => {
+      off(dbRef)
+    }
+  }, []);
+
+
+  const searchQuery = useSelector((state: RootState) => state.searcherQuery.searchQuery)
+
 
   const handleSearchChange = (event: any) => {
     dispatch(setSearchQuery(event.target.value))
   }
 
   // Filtered food items based on search query
-  const filteredFoodItems = FoodItems.filter(foodItem =>
-    foodItem.name.toLowerCase().includes(searchQuery.toLowerCase()) 
-  );
+  const filteredFoods = foods ? foods.filter(food =>
+    food.name.toLowerCase().includes(searchQuery.toLowerCase()) 
+  ) : [];
 
   return (
     <>
@@ -89,24 +123,30 @@ const Menu = () => {
               - Conditional rendering based on filteredFoodItems
             */}
 
-              {filteredFoodItems.length === 0 ? (
+              {filteredFoods.length === 0 ? (
                 <p className="text-center text-gray-600">No Food Items Matched...</p>
               ) : (     
-              filteredFoodItems.map((foodItem: FoodItem, index: number) => (
+              filteredFoods.map((food: FoodInterface) => (
                 <Sheet>
                   {/*
                     This will trigger <MenuItemDetails /> component
                     to slide in on right part of screen
+
+                    Pass '__id_food' as key value and 
+                    pass state variable 'food' as food prop value  
                   */}
                   <SheetTrigger>
-                    <MenuItem key={index} foodItem={foodItem} />
+                    <MenuItem key={food.__id_food} food={food} />
                   </SheetTrigger>
 
                   {/* 
                     A component containing all details of a 
                     clicked item.
+
+                    Pass '__id_food' as key value and 
+                    pass state variable 'food' as food prop value
                   */}
-                  <MenuItemDetails key={index} foodItem={foodItem} />
+                  <MenuItemDetails key={food.__id_food} food={food} />
                 </Sheet>
               ))
             )}
@@ -114,9 +154,6 @@ const Menu = () => {
         </div>
       </div>
 
-      <div className="px-20 w-full flex flex-col justify-center">
-        <Test />
-      </div>
     </>
   )
 }
