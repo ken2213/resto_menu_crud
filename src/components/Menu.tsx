@@ -32,6 +32,7 @@ const Menu = () => {
     const database = FirebaseConfig();
     const dbRef = ref(database, 'foodItems');
 
+
     // Retrieve data which is foods from Firebase
     onValue(dbRef, (snapshot) => {
       const data = snapshot.val();
@@ -39,9 +40,13 @@ const Menu = () => {
       if (data) {
         // Convert the object of food items to an array
         const foodsArray = Object.values(data);
+        console.log("Fetched foods from firebase:", foodsArray); // Log fetched data
         // Set 'foodsArray' on state'setFood' setter variable
         // So technically it will be stored on 'food' state variable
         dispatch(setFood(foodsArray))
+      } else {
+        console.log("No data fetched from firebase");
+        dispatch(setFood([])); // Ensure Redux store is updated with an empty array
       }
     })
 
