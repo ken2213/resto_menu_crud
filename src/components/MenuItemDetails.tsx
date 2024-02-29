@@ -5,6 +5,7 @@ import { FoodInterface } from "@/types";
 import { Dialog, DialogTrigger } from "./ui/dialog";
 import EditFoodForm from "./modals/EditFood"; 
 import { DeleteFood } from "./modals/DeleteFood";
+import { Badge } from "./ui/badge";
 
 const MenuItemDetails = ({ food }: { food: FoodInterface }) => {
   return (
@@ -123,7 +124,7 @@ const MenuItemDetails = ({ food }: { food: FoodInterface }) => {
         <div className='flex flex-col justify-center items-center font-semibold gap-y-4'>
           <h1 className='text-gray-200'>Available Sizes</h1>
           <div className='w-full flex justify-evenly'>
-            {/* {foodItem.options?.map((option) => (
+            {food.sizeOptions.map((option) => (
                 <Badge
                     className='text-gray-300 bg-gray-700 shadow-sm hover:bg-gray-600 hover:cursor-pointer hover:text-gray-200 hover:shadow-lg  hover:transition-all transition-all py-2 px-4'
                     title={option}
@@ -134,7 +135,7 @@ const MenuItemDetails = ({ food }: { food: FoodInterface }) => {
                       {option}
                     </div>
                 </Badge>
-            ))} */}
+            ))}
           </div>
 
         </div>
