@@ -37,15 +37,14 @@ const MenuItem = ({ food }: { food: FoodInterface }) => {
                     <CardTitle 
                         className='tracking-wide font-extrabold flex justify-center'
                     >
-                        <Dot className='text-gray-700' />
                         {food.name}
-                        <Dot className='text-gray-700'
-                        />
                     </CardTitle>
                     <CardDescription
-                        className='text-md font-semibold'
+                        className='text-md font-semibold capitalize flex justify-center'
                     >
+                        <Dot className='text-gray-700' />
                         {food.category}
+                        <Dot className='text-gray-700' />
                     </CardDescription>
                 </div>
 
@@ -134,7 +133,7 @@ const MenuItem = ({ food }: { food: FoodInterface }) => {
             <CardFooter className='flex flex-col'>
                 <p className='text-start w-full'>Available Sizes</p>
                 <div className='w-full flex'>
-                    {/* {foodItem.options?.map((option) => (
+                    {food.sizeOptions.map((option) => (
                         <div 
                             className='w-6 mr-1 flex justify-center items-start rounded-full font-bold px-4 py-1 hover:bg-gray-300 hover:cursor-pointer hover:text-gray-700 hover:transition-all transition-all'
                         >
@@ -147,7 +146,7 @@ const MenuItem = ({ food }: { food: FoodInterface }) => {
                                 {option === 'large' && 'L'}
                             </div>
                         </div>
-                    ))} */}
+                    ))}
                 </div>
             </CardFooter>
         </Card>
