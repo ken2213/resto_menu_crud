@@ -8,15 +8,15 @@ import {
   Inventory,
   Menu,
   Orders,
-  SideBar, 
 } from "./components"
+import TopNavigation from "./components/TopNavigation"
 
 const App = () => {
 
   return (
     <div className="h-screen flex flex-col justify-between">
       <div className="flex flex-row w-full">
-        <SideBar />
+        <TopNavigation />
         <div className="container min-h-screen bg-sub-dark text-indigo-50">
           <Routes>
             <Route path="/" element={<Home />} index />
