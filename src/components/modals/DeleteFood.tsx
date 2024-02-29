@@ -12,6 +12,7 @@ import { setFood } from "@/redux/features/food/foodSlice"
 import { RootState } from "@/redux/store"
 import { FoodInterface } from "@/types"
 import { child, ref, remove } from "firebase/database"
+import { useForm } from "react-hook-form"
 import { useDispatch, useSelector } from "react-redux"
 
 
@@ -20,24 +21,29 @@ export function DeleteFood({ food } : { food: FoodInterface }) {
   const dispatch = useDispatch();
   const foods = useSelector((state: RootState) => state.fooder.foods)
 
-  function handleDelete(foodId : string) {
+  // Define your form
+  const { handleSubmit } = useForm();
+
+  // Define a submit handler
+  const onSubmit = () => {
     const database = FirebaseConfig();
     const dbRef = ref(database, 'foodItems');
 
     try {
-      remove(child(dbRef, foodId))
+      remove(child(dbRef, food.__id_food))
       .then(() => {
         alert("Food item deleted successfully");
         // After deletion, update the state to trigger re-render
-        dispatch(setFood(foods.filter(food => food.__id_food !== foodId)))
+        const updatedFoods = foods.filter((f) => f.__id_food !== food.__id_food);;
+        dispatch(setFood(updatedFoods));
       })
-      .catch(error => {
-        console.error("Error updating food item:", error);
-        alert("An error occurred while deleting food item. Please try again.")
+      .catch((error) => {
+        console.error("Error deleting food item:", error);
+        alert("An error occurred while deleting food item. Please try again.");
       })
     } catch (error) {
-      console.error("Error updaing food item:", error);
-      alert("An error occurred while deleting food item. Please try again.")
+      console.error("Error deleting food item:", error);
+      alert("An error occurred while deleting food item. Please try again.");
     }
   }
 
@@ -51,16 +57,20 @@ export function DeleteFood({ food } : { food: FoodInterface }) {
               </DialogDescription>
           </DialogHeader>
           
-          <DialogFooter>
-            <DialogClose>
-              <Button type="submit" onClick={() => handleDelete(food.__id_food)}>Delete</Button>
-            </DialogClose>
+          
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <DialogFooter>
+              <DialogClose>
+                <Button type="submit">Delete</Button>
+              </DialogClose>
 
-            <DialogClose>
-              <Button>Cancel</Button>
-            </DialogClose>
+              <DialogClose>
+                <Button>Cancel</Button>
+              </DialogClose>
 
-          </DialogFooter>
+            </DialogFooter>
+          </form>
+          
       </DialogContent>
     </>
   )
