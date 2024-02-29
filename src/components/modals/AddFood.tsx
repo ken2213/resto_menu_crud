@@ -37,6 +37,8 @@ import { ref, set, child } from "firebase/database";
 import FirebaseConfig from "@/config/firebase";
 
 import { v4 as uuidv4 } from 'uuid';
+import { sizes } from "@/constants";
+import { Checkbox } from "../ui/checkbox";
 
 const formSchema = z.object({
     /* 
@@ -92,6 +94,13 @@ const formSchema = z.object({
     }).lte(100000, {
         message: "this stock is too big"
     }).nonnegative(),
+
+    /* 
+        Validate checkboxes
+    */
+    sizeOptions: z.array(z.string()).refine((value) => value.some((item) => item), {
+        message: "You have to select at least one item.",
+    }),
 })
 
 export function AddFoodForm() {
@@ -104,7 +113,8 @@ export function AddFoodForm() {
             category: "",
             cost: 0,
             price: 0,
-            stocks: 0
+            stocks: 0,
+            sizeOptions: [],
         },
         /* 
             This will enable you to see error messages 
@@ -284,6 +294,57 @@ export function AddFoodForm() {
                                 <FormDescription>
                                     Enter stocks available
                                 </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    {/* Food Sizes */}
+                    <FormField
+                        control={form.control}
+                        name="sizeOptions"
+                        render={() => (
+                            <FormItem>
+                                <div className="mb-4">
+                                    <FormLabel className="text-base">Size Options</FormLabel>
+                                    <FormDescription>
+                                        Select the size options for the food.
+                                    </FormDescription>
+                                </div>
+                                {sizes.map((size) => (
+                                    <FormField 
+                                        key={size.id}
+                                        control={form.control}
+                                        name="sizeOptions"
+                                        render={({ field }) => {
+                                            return (
+                                                <FormItem
+                                                    key={size.id}
+                                                    className="flex flex-row items-start space-x-3 space-y-0"
+                                                > 
+                                                    <FormControl>
+                                                    <Checkbox
+                                                        className="border-gray-500"
+                                                        checked={field.value?.includes(size.id)}
+                                                        onCheckedChange={(checked) => {
+                                                        return checked
+                                                            ? field.onChange([...field.value, size.id])
+                                                            : field.onChange(
+                                                                field.value?.filter(
+                                                                (value) => value !== size.id
+                                                                )
+                                                            )
+                                                        }}
+                                                    />
+                                                    </FormControl>
+                                                    <FormLabel className="font-normal">
+                                                        {size.label}
+                                                    </FormLabel>
+                                                </FormItem>
+                                            )
+                                        }}
+                                    />
+                                ))}
                                 <FormMessage />
                             </FormItem>
                         )}
