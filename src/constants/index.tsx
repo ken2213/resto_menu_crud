@@ -203,4 +203,19 @@ export const Categories: CategoryInterface[] = [
     {
         categoryTitle: "salad"
     },
-] 
+]
+
+export const sizes = [
+    {
+        id: "small",
+        label: "Small",
+    },
+    {
+        id: "medium",
+        label: "Medium",
+    },
+    {
+        id: "large",
+        label: "Large",
+    },
+]
