@@ -18,7 +18,6 @@ import { useDispatch, useSelector } from "react-redux"
 
 export function DeleteFood({ food } : { food: FoodInterface }) {
   const dispatch = useDispatch();
-
   const foods = useSelector((state: RootState) => state.fooder.foods)
 
   function handleDelete(foodId : string) {
@@ -26,7 +25,7 @@ export function DeleteFood({ food } : { food: FoodInterface }) {
     const dbRef = ref(database, 'foodItems');
 
     try {
-      remove(child(dbRef, food.__id_food))
+      remove(child(dbRef, foodId))
       .then(() => {
         alert("Food item deleted successfully");
         // After deletion, update the state to trigger re-render
