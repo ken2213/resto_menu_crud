@@ -9,6 +9,7 @@ import { Dialog, DialogTrigger } from "./ui/dialog";
 import { Button } from "./ui/button";
 import { Plus } from "lucide-react";
 import { AddFoodForm } from "./modals/AddFood";
+import Category from "./Category";
 
 const MenuNavigation = () => {
     const dispatch = useDispatch();
@@ -19,32 +20,38 @@ const MenuNavigation = () => {
     };
 
     return (
-        <div className="w-full flex justify-end sm:justify-center items-center">
-            <div className="flex md:gap-x-8 w-full sm:w-[80%] lg:w-[65%] xl:w-[55%] 2xl:w-[50%] justify-center  sm:justify-around md:justify-center lg:justify-around">
-                {/* Search input */}
-                <div className="flex w-[85%] max-w-[500px] 2xl:max-w-[650px] px-4">
-                    <Input 
-                        type="text"
-                        placeholder="Search..."
-                        value={searchQuery}
-                        onChange={handleSearchChange}
-                        className="text-gray-50 bg-sub-dark border-gray-700 shadow-md"
-                    />
-                </div>
+        <div className="w-full flex flex-col ">
+            <div className="w-full flex justify-end sm:justify-center items-center">
+                <div className="flex md:gap-x-8 w-full sm:w-[80%] lg:w-[65%] xl:w-[55%] 2xl:w-[50%] justify-center  sm:justify-around md:justify-center lg:justify-around py-4">
+                    {/* Search input */}
+                    <div className="flex w-[75%] max-w-[500px] 2xl:max-w-[650px] px-4">
+                        <Input 
+                            type="text"
+                            placeholder="Search..."
+                            value={searchQuery}
+                            onChange={handleSearchChange}
+                            className="text-gray-50 bg-sub-dark border-gray-700 shadow-md"
+                        />
+                    </div>
 
-                <div className="flex sm:w-[5%] justify-center items-center">
-                    <Dialog>
-                        <DialogTrigger>
-                            <Button 
-                                className="p-0"
-                                variant="ghost"
-                            >
-                                <Plus className="text-green-700" /> 
-                            </Button>
-                        </DialogTrigger>
-                        <AddFoodForm />
-                    </Dialog>
+                    <div className="flex sm:w-[5%] justify-center items-center">
+                        <Dialog>
+                            <DialogTrigger>
+                                <Button 
+                                    className="p-0"
+                                    variant="ghost"
+                                >
+                                    <Plus className="text-green-700" /> 
+                                </Button>
+                            </DialogTrigger>
+                            <AddFoodForm />
+                        </Dialog>
+                    </div>
                 </div>
+            </div>
+
+            <div className="w-full min-h-14 pb-2 flex justify-center items-center">
+                <Category />
             </div>
         </div>
     );
