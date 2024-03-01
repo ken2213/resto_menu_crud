@@ -11,12 +11,15 @@ import { setFood } from "@/redux/features/food/foodSlice"
 import FirebaseConfig from "@/config/firebase";
 import { off, onValue, ref } from "firebase/database"
 
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { FoodInterface } from "@/types"
+
 
 const Menu = () => {
   const dispatch = useDispatch();
   const foods = useSelector((state: RootState) => state.fooder.foods)
+
+  const [loading, setLoading] = useState(true);
 
   /*
     This is searchQuery state variable that uses redux,
@@ -52,6 +55,7 @@ const Menu = () => {
         // Set 'foodsArray' on state'setFood' setter variable
         // So technically it will be stored on 'food' state variable
         dispatch(setFood(foodsArray))
+        setLoading(false);
       } else {
         console.log("No Data Fetched from firebase");
         /*
@@ -64,6 +68,7 @@ const Menu = () => {
           re-render for you
         */
         dispatch(setFood([]));
+        setLoading(false);
       }
     })
 
@@ -77,61 +82,83 @@ const Menu = () => {
 
   return (
     <>
-      <div className="w-full flex justify-center ">
-        <div className="w-[350px] sm:w-[560px] md:w-[690px] lg:w-[940px] xl:w-[1100px] 2xl:w-[1350px] ">
-          <h1 className="text-[2rem] sm:text-[3.5rem] md:text-[4rem] lg:text-[4.5rem] font-bold px-6">MENU MANAGER</h1>
-        </div>
-
-      </div>
-
-      <div className="w-full flex justify-center">
-        {/* GRID CONTAINER */}
-        <div 
-          className="
-            overflow-y-auto sm:w-[560px] md:w-[690px] lg:w-[940px] xl:w-[1200px] 2xl:w-[1350px]
-            "
-        >
-          {/* GRID */}
-          <div 
-            className="w-full px-4 py-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center xl:justify-items-start gap-x-4 gap-y-8"
+      {/* Conditionally render loading screen */}
+      {loading ? (
+        <div className="flex flex-col gap-y-8 justify-center items-center h-screen">
+          <div
+            className="inline-block h-8 w-8 lg:h-16 lg:w-16 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+            role="status"
           >
-            {/* 
-              - This will map all of items of FoodItems 
-              array variable inside of MenuItem component
-
-              - Conditional rendering based on filteredFoodItems
-            */}
-
-              {filteredFoods.length === 0 ? (
-                <p className="text-center text-gray-600">No Food Items Matched...</p>
-              ) : (     
-              filteredFoods.map((food: FoodInterface) => (
-                <Sheet>
-                  {/*
-                    This will trigger <MenuItemDetails /> component
-                    to slide in on right part of screen
-
-                    Pass '__id_food' as key value and 
-                    pass state variable 'food' as food prop value  
-                  */}
-                  <SheetTrigger>
-                    <MenuItem key={food.__id_food} food={food} />
-                  </SheetTrigger>
-
-                  {/* 
-                    A component containing all details of a 
-                    clicked item.
-
-                    Pass '__id_food' as key value and 
-                    pass state variable 'food' as food prop value
-                  */}
-                  <MenuItemDetails key={food.__id_food} food={food} />
-                </Sheet>
-              ))
-            )}
+            <span
+              className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+            >
+            </span>
           </div>
+          <h4>
+            Loading data...
+          </h4>
         </div>
-      </div>
+      ) : (
+        <>
+          <div className="w-full flex justify-center mt-[120px]">
+            {/* <div className="w-[350px] sm:w-[560px] md:w-[690px] lg:w-[940px] xl:w-[1100px] 2xl:w-[1350px] ">
+              <h1 className="text-[2rem] sm:text-[3.5rem] md:text-[4rem] lg:text-[4.5rem] font-bold px-6">MENU MANAGER</h1>
+            </div> */}
+
+          </div>
+
+          <div className="w-full flex justify-center">
+            {/* GRID CONTAINER */}
+            <div 
+              className="
+                overflow-y-auto sm:w-[560px] md:w-[690px] lg:w-[940px] xl:w-[1200px] 2xl:w-[1350px]
+                "
+            >
+              {/* GRID */}
+              <div 
+                className="w-full px-4 py-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center xl:justify-items-start gap-x-4 gap-y-8"
+              >
+                {/* 
+                  - This will map all of items of FoodItems 
+                  array variable inside of MenuItem component
+
+                  - Conditional rendering based on filteredFoodItems
+                */}
+
+                  {filteredFoods.length === 0 ? (
+                    <p className="text-center text-gray-600">No Food Items Matched...</p>
+                  ) : (     
+                  filteredFoods.map((food: FoodInterface) => (
+                    <Sheet>
+                      {/*
+                        This will trigger <MenuItemDetails /> component
+                        to slide in on right part of screen
+
+                        Pass '__id_food' as key value and 
+                        pass state variable 'food' as food prop value  
+                      */}
+                      <SheetTrigger>
+                        <MenuItem key={food.__id_food} food={food} />
+                      </SheetTrigger>
+
+                      {/* 
+                        A component containing all details of a 
+                        clicked item.
+
+                        Pass '__id_food' as key value and 
+                        pass state variable 'food' as food prop value
+                      */}
+                      <MenuItemDetails key={food.__id_food} food={food} />
+                    </Sheet>
+                  ))
+                )}
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+
+      
 
     </>
   )
