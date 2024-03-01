@@ -15,9 +15,12 @@ import { child, ref, remove } from "firebase/database"
 import { useForm } from "react-hook-form"
 import { useDispatch, useSelector } from "react-redux"
 
+import { useToast } from "../ui/use-toast"
 
 
 export function DeleteFood({ food } : { food: FoodInterface }) {
+  const { toast } = useToast()
+
   const dispatch = useDispatch();
   const foods = useSelector((state: RootState) => state.fooder.foods)
 
@@ -32,18 +35,31 @@ export function DeleteFood({ food } : { food: FoodInterface }) {
     try {
       remove(child(dbRef, food.__id_food))
       .then(() => {
-        alert("Food item deleted successfully");
+        // alert("Food item deleted successfully");
+        toast({
+          variant: "dark",
+          title: `'${food.name}' Deleted Successfully`
+        })
+
         // After deletion, update the state to trigger re-render
         const updatedFoods = foods.filter((f) => f.__id_food !== food.__id_food);;
         dispatch(setFood(updatedFoods));
       })
       .catch((error) => {
         console.error("Error deleting food item:", error);
-        alert("An error occurred while deleting food item. Please try again.");
+        // alert("An error occurred while deleting food item. Please try again.");
+        toast({
+          variant: "destructive",
+          title: `An error occurred while deleting '${food.name}'. Please try again.`
+        })
       })
     } catch (error) {
       console.error("Error deleting food item:", error);
-      alert("An error occurred while deleting food item. Please try again.");
+      // alert("An error occurred while deleting food item. Please try again.");
+      toast({
+        variant: "destructive",
+        title: `An error occurred while deleting '${food.name}'. Please try again.`
+      })
     }
   }
 

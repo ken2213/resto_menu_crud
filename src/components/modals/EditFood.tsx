@@ -12,7 +12,7 @@ import { child, ref, update } from 'firebase/database'
 import { sizes } from '@/constants'
 import { Checkbox } from '../ui/checkbox'
 
-
+import { useToast } from '../ui/use-toast';
 
 const formSchema = z.object({
     /* 
@@ -79,6 +79,8 @@ const formSchema = z.object({
 
 const EditFoodForm = ({ food } : { food: FoodInterface }) => {
 
+    const { toast } = useToast()
+
     // Define your form
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -117,15 +119,27 @@ const EditFoodForm = ({ food } : { food: FoodInterface }) => {
             // Update data to Firebase Realtime Database
             update(child(dbRef, food.__id_food), updatedFood)
             .then(() => {
-                alert("Food item updated successfully");
+                // alert("Food item updated successfully");
+                toast({
+                    variant: "dark",
+                    title: `'${updatedFood.name}' was updated successfully`,
+                })
             })
             .catch(error => {
                 console.error("Error updating food item:", error);
-                alert("An error occured while updating food item. Please try again.")
+                // alert("An error occured while updating food item. Please try again.")
+                toast({
+                    variant: "destructive",
+                    title: "An error occurred while updating food item. Please try again."
+                })
             })
         } catch (error) {
             console.error("Error updating food item:", error);
-            alert("An error occurred while updating food item. Please try again.");
+            // alert("An error occurred while updating food item. Please try again.");
+            toast({
+                variant: "destructive",
+                title: "An error occurred while updating food item. Please try again."
+            })
         }
     }
 
