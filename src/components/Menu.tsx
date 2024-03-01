@@ -8,11 +8,8 @@ import { RootState } from "@/redux/store"
 
 import { setFood } from "@/redux/features/food/foodSlice"
 
-import Category from "./Category"
-
 import FirebaseConfig from "@/config/firebase";
 import { off, onValue, ref } from "firebase/database"
-
 
 import { useEffect } from "react"
 import { FoodInterface } from "@/types"
@@ -85,12 +82,6 @@ const Menu = () => {
           <h1 className="text-[2rem] sm:text-[3.5rem] md:text-[4rem] lg:text-[4.5rem] font-bold px-6">MENU MANAGER</h1>
         </div>
 
-      </div>
-
-      <div className="w-full min-h-10 flex justify-center items-center mt-1">
-        <div className="w-[350px] sm:w-[560px] md:w-[690px] lg:w-[940px] xl:w-[1200px] 2xl:w-[1350px] px-8 pt-2 pb-4 flex justify-start gap-x-4 overflow-y-auto">
-          <Category />
-        </div>
       </div>
 
       <div className="w-full flex justify-center">
