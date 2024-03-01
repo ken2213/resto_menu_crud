@@ -10,6 +10,7 @@ import {
   Orders,
 } from "./components"
 import TopNavigation from "./components/TopNavigation"
+import { Toaster } from "./components/ui/toaster"
 
 const App = () => {
 
@@ -27,6 +28,8 @@ const App = () => {
             <Route path="/inventory" element={<Inventory />} />
             <Route path="/orders" element={<Orders />} />
           </Routes>
+          {/* This is crucial for toast throughout the web app to work */}
+          <Toaster />
         </div>
       </div>
     </div>
