@@ -52,13 +52,13 @@ const TopNavigation = () => {
 
     return (
         <>
-            <nav className="w-full h-16 fixed flex items-center bg-main-dark">
+            <nav className="w-full min-h-16 fixed flex justify-center items-center bg-main-dark">
                 {windowWidth < 640 ? (
                     showCloseButton ? (
                         <Button
                             onClick={hideSidebar}
                             variant="ghost"
-                            className="text-gray-300 hover:text-gray-300 hover:bg-main-dark px-2 py-1 ml-16"
+                            className="text-gray-300 bg-main-dark hover:text-gray-300 hover:bg-sub-dark px-2 py-1 ml-16 absolute top-4 left-0"
                         >
                             <XCircle size={20} className="hover:text-gray-100"/>
                         </Button>
@@ -66,7 +66,7 @@ const TopNavigation = () => {
                         <Button
                             onClick={() => { toggleSidebar(); setShowCloseButton(true); }}
                             variant="ghost"
-                            className="text-gray-300 hover:text-gray-300 hover:bg-sub-dark px-2 py-1 ml-2"
+                            className="text-gray-300 hover:text-gray-300 hover:bg-sub-dark px-2 py-1 ml-2 absolute top-4 left-0"
                         >
                             <Menu />
                         </Button>
