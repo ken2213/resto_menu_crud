@@ -23,11 +23,11 @@ const MenuItemDetails = ({ food }: { food: FoodInterface }) => {
 
         {/* FOOD NAME AND CATEGORY */}
         <div className="flex flex-col">
-          <h1 className="text-[2.5rem] font-extrabold text-center tracking-wide">
+          <h1 className="text-[2rem] sm:text-[2.5rem] font-extrabold text-center tracking-wide">
             {food.name}
           </h1>
 
-          <p className="text-gray-500 text-[1.2rem] text-center font-semibold capitalize">
+          <p className="text-gray-500 text-[1rem] sm:text-[1.2rem] text-center font-semibold capitalize">
             {food.category}
           </p>
         </div>
@@ -50,7 +50,7 @@ const MenuItemDetails = ({ food }: { food: FoodInterface }) => {
                 </div>
 
                 <div className='flex items-center'>
-                    <p className='text-lg font-semibold'>
+                    <p className='text-md sm:text-lg font-semibold'>
                         Price
                     </p> 
                 </div>
@@ -58,7 +58,7 @@ const MenuItemDetails = ({ food }: { food: FoodInterface }) => {
             
             <div className='font-bold text-lg'>
                 <p>
-                    <span className='text-sm text-gray-500'>$</span>
+                    <span className='text-sm text-gray-500'>₱</span>
                     {food.price}
                 </p>
             </div>
@@ -74,7 +74,7 @@ const MenuItemDetails = ({ food }: { food: FoodInterface }) => {
                   </div>
                   
                   <div className='flex items-center'>
-                      <p className='text-lg font-semibold'>
+                      <p className='text-md sm:text-lg font-semibold'>
                           Manufacturing Cost
                       </p> 
                   </div>
@@ -82,7 +82,7 @@ const MenuItemDetails = ({ food }: { food: FoodInterface }) => {
 
               <div className='font-bold text-lg'>
                   <p>
-                      <span className='text-sm text-gray-500'>$</span>
+                      <span className='text-sm text-gray-500'>₱</span>
                       {food.cost}
                   </p>
               </div>
@@ -99,7 +99,7 @@ const MenuItemDetails = ({ food }: { food: FoodInterface }) => {
                   </div>
 
                   <div className='flex items-center'>
-                      <p className='text-lg font-semibold'>
+                      <p className='text-md sm:text-lg  font-semibold'>
                           Stocks left
                       </p> 
                   </div>
