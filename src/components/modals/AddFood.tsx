@@ -40,6 +40,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { sizes } from "@/constants";
 import { Checkbox } from "../ui/checkbox";
 
+import { useToast } from "../ui/use-toast";
+
 const formSchema = z.object({
     /* 
         Validate entered data as string
@@ -105,6 +107,8 @@ const formSchema = z.object({
 
 export function AddFoodForm() {
 
+    const { toast } = useToast()
+
     // 1. Define your form
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -151,14 +155,26 @@ export function AddFoodForm() {
             set(child(dbRef, foodId), foodDataWithTimestamp)
                 .then(() => {
                     console.log("Form data submitted successfully");
-                    alert("Form data submitted successfully");
+                    // alert("Form data submitted successfully");
+                    toast({
+                        variant: "dark",
+                        title: "Form Submitted Successfully.",
+                    })
                     form.reset()
                 })
                 .catch((error) => {
                     console.error("Error submitting form data", error)
+                    toast({
+                        variant: "destructive",
+                        title: "Error submitting form data."
+                    })
                 })
         } catch (error) {
             console.error("Error initializing Firebase:", error);
+            toast({
+                variant: "destructive",
+                title: "Error Initializing Firebase"
+            })
         }
     }
 
