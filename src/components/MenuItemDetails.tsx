@@ -9,7 +9,7 @@ import { Badge } from "./ui/badge";
 
 const MenuItemDetails = ({ food }: { food: FoodInterface }) => {
   return (
-    <SheetContent className="bg-main-dark border-l-gray-600 pt-12 text-gray-50">
+    <SheetContent className="bg-main-dark border-l-gray-600 pt-12 text-gray-50 overflow-y-auto pb-0">
       <SheetHeader>
         {/* FOOD IMAGE */}
         <div className="w-full">
@@ -17,7 +17,7 @@ const MenuItemDetails = ({ food }: { food: FoodInterface }) => {
             // src={food.image}
             src="https://honehealth.com/wp-content/uploads/2023/06/high-protein-fast-food-1.webp"
             alt={food.name}
-            className="w-full h-[280px] object-cover rounded-md shadow-2xl"
+            className="w-full min-h-[200px] max-h-[350px] object-cover rounded-md shadow-2xl"
           />
         </div>
 
@@ -27,7 +27,7 @@ const MenuItemDetails = ({ food }: { food: FoodInterface }) => {
             {food.name}
           </h1>
 
-          <p className="text-gray-500 text-[1.2rem] text-center font-semibold">
+          <p className="text-gray-500 text-[1.2rem] text-center font-semibold capitalize">
             {food.category}
           </p>
         </div>
@@ -36,7 +36,7 @@ const MenuItemDetails = ({ food }: { food: FoodInterface }) => {
       {/* Horizontal Line */}
       <hr className='border-gray-700 opacity-30 rounded-full border-[2px] my-4' />
 
-      <main className="mx-2 h-[380px] text-gray-300 overflow-y-auto">
+      <main className="mx-2 min-h-[590px] text-gray-300 overflow-y-auto">
 
         <div className='pt-2 flex flex-col gap-y-2 '>
 
@@ -123,9 +123,12 @@ const MenuItemDetails = ({ food }: { food: FoodInterface }) => {
         {/* AVAILABLE SIZES */}
         <div className='flex flex-col justify-center items-center font-semibold gap-y-4'>
           <h1 className='text-gray-200'>Available Sizes</h1>
-          <div className='w-full flex justify-evenly'>
+          <div className='w-full h-auto flex flex-wrap gap-x-2 gap-y-4 justify-evenly py-4 
+          '>
             {food.sizeOptions.map((option) => (
+              <>
                 <Badge
+                    key={option}
                     className='text-gray-300 bg-gray-700 shadow-sm hover:bg-gray-600 hover:cursor-pointer hover:text-gray-200 hover:shadow-lg  hover:transition-all transition-all py-2 px-4'
                     title={option}
                 >
@@ -135,6 +138,7 @@ const MenuItemDetails = ({ food }: { food: FoodInterface }) => {
                       {option}
                     </div>
                 </Badge>
+              </>
             ))}
           </div>
 
@@ -142,13 +146,12 @@ const MenuItemDetails = ({ food }: { food: FoodInterface }) => {
             
       </main>
 
-
-      <footer className="absolute bottom-0 left-0 w-full grid grid-cols-2 gap-x-4 px-6 pb-6">
+      <footer className="sticky z-10 w-full grid grid-cols-2 gap-x-2">
         <Dialog>
           <DialogTrigger>
             <Button
               variant={"destructive"}
-              className="text-sm"
+              className="text-sm w-full"
             >
               <Trash 
                 className="mr-2 h-4 w-4" 
@@ -163,7 +166,7 @@ const MenuItemDetails = ({ food }: { food: FoodInterface }) => {
           <DialogTrigger>
             <Button
               variant={"default"}
-              className="text-sm bg-orange-500"
+              className="text-sm bg-orange-500 hover:bg-orange-600 w-full"
             >
               <Pen 
                 className="mr-2 h-4 w-4" 
