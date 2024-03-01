@@ -55,6 +55,18 @@ const Menu = () => {
         // Set 'foodsArray' on state'setFood' setter variable
         // So technically it will be stored on 'food' state variable
         dispatch(setFood(foodsArray))
+      } else {
+        console.log("No Data Fetched from firebase");
+        /*
+          If there's no data on foodsArray 
+          set it into an empty array
+
+          Technically speaking, when you delete the only last
+          data on an array it will also delete across devices
+          without the need to refresh because it will automatically
+          re-render for you
+        */
+        dispatch(setFood([]));
       }
     })
 
