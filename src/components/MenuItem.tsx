@@ -35,7 +35,7 @@ const MenuItem = ({ food }: { food: FoodInterface }) => {
                 {/* Food Item Name and Category */}
                 <div className='pt-3 pb-2'>
                     <CardTitle 
-                        className='tracking-wide font-extrabold flex justify-center'
+                        className='tracking-wide font-extrabold flex justify-center capitalize'
                     >
                         {food.name}
                     </CardTitle>
@@ -72,7 +72,7 @@ const MenuItem = ({ food }: { food: FoodInterface }) => {
                         
                         <div className='font-bold'>
                             <p>
-                                <span className='text-xs text-gray-400'>$</span>
+                                <span className='text-xs text-gray-400'>₱</span>
                                 {food.price}
                             </p>
                         </div>
@@ -96,7 +96,7 @@ const MenuItem = ({ food }: { food: FoodInterface }) => {
 
                         <div className='font-bold'>
                             <p>
-                                <span className='text-xs text-gray-400'>$</span>
+                                <span className='text-xs text-gray-400'>₱</span>
                                 {food.cost}
                             </p>
                         </div>
