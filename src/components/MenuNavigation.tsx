@@ -24,7 +24,7 @@ const MenuNavigation = () => {
             <div className="w-full flex justify-end sm:justify-center items-center">
                 <div className="flex md:gap-x-8 w-full sm:w-[80%] lg:w-[65%] xl:w-[55%] 2xl:w-[50%] justify-center  sm:justify-around md:justify-center lg:justify-around py-4">
                     {/* Search input */}
-                    <div className="flex w-[75%] max-w-[500px] 2xl:max-w-[650px] px-4">
+                    <div className="flex w-[65%] max-w-[500px] 2xl:max-w-[650px] px-4">
                         <Input 
                             type="text"
                             placeholder="Search..."
