@@ -195,13 +195,31 @@ export const Categories: CategoryInterface[] = [
         categoryTitle: "beverages"
     },
     {
-        categoryTitle: "snack"
-    },
-    {
         categoryTitle: "dessert"
     },
     {
         categoryTitle: "salad"
+    },
+    {
+        categoryTitle: "vegan"
+    },
+    {
+        categoryTitle: "comfort food"
+    },
+    {
+        categoryTitle: "halal"
+    },
+    {
+        categoryTitle: "dairy-free"
+    },
+    {
+        categoryTitle: "gourmet"
+    },
+    {
+        categoryTitle: "snack"
+    },
+    {
+        categoryTitle: "seafood"
     },
 ]
 
