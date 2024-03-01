@@ -350,13 +350,24 @@ export function AddFoodForm() {
                         )}
                     />
 
-                    <DialogFooter>
+                    <DialogFooter className="gap-x-2 gap-y-4 flex-col-reverse">
+                        <DialogClose>
+                            <Button
+                                className="w-[80%] sm:w-auto"
+                                variant="ghost"
+                                type="button"
+                            >
+                            Cancel
+                            </Button>
+                        </DialogClose>
+
                         <DialogClose 
                         disabled={!form.formState.isValid || !form.formState.dirtyFields}
                         >
                             <Button 
                                 type="submit"
                                 disabled={!form.formState.isValid || !form.formState.dirtyFields}
+                                className="bg-green-800 hover:bg-green-900 w-[80%] sm:w-auto"
                             >
                                 Submit
                             </Button>
