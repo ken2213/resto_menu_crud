@@ -36,7 +36,7 @@ const MenuItemDetails = ({ food }: { food: FoodInterface }) => {
       {/* Horizontal Line */}
       <hr className='border-gray-700 opacity-30 rounded-full border-[2px] my-4' />
 
-      <main className="mx-2 min-h-[590px] text-gray-300 overflow-y-auto">
+      <main className="mx-2 min-h-[580px] text-gray-300 overflow-y-auto">
 
         <div className='pt-2 flex flex-col gap-y-2 '>
 
@@ -146,7 +146,7 @@ const MenuItemDetails = ({ food }: { food: FoodInterface }) => {
             
       </main>
 
-      <footer className="sticky z-10 w-full grid grid-cols-2 gap-x-2">
+      <footer className="sticky z-10 bottom-2 w-full grid grid-cols-2 gap-x-2">
         <Dialog>
           <DialogTrigger>
             <Button
