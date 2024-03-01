@@ -38,10 +38,10 @@ const MenuNavigation = () => {
                         <Dialog>
                             <DialogTrigger>
                                 <Button 
-                                    className="p-0"
+                                    className="px-3 text-[1.05rem] font-semibold bg-green-700 hover:bg-green-800 rounded-full shadow-sm text-green-100 hover:text-green-200"
                                     variant="ghost"
                                 >
-                                    <Plus className="text-green-700" /> 
+                                    <Plus /> Create
                                 </Button>
                             </DialogTrigger>
                             <AddFoodForm />
