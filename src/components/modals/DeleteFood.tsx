@@ -59,13 +59,25 @@ export function DeleteFood({ food } : { food: FoodInterface }) {
           
           
           <form onSubmit={handleSubmit(onSubmit)}>
-            <DialogFooter>
+            <DialogFooter className="gap-x-2 gap-y-4 flex-col">
               <DialogClose>
-                <Button type="submit">Delete</Button>
+                <Button 
+                  type="submit"
+                  variant="destructive"
+                  className="w-[60%] sm:w-auto"
+                >
+                  Delete
+                </Button>
               </DialogClose>
 
               <DialogClose>
-                <Button>Cancel</Button>
+                <Button
+                  className="w-[60%] sm:w-auto"
+                  variant="ghost"
+                  type="button"
+                >
+                  Cancel
+                </Button>
               </DialogClose>
 
             </DialogFooter>
