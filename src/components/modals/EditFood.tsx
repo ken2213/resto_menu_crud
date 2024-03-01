@@ -9,6 +9,8 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import { Button } from '../ui/button'
 import FirebaseConfig from '@/config/firebase'
 import { child, ref, update } from 'firebase/database'
+import { sizes } from '@/constants'
+import { Checkbox } from '../ui/checkbox'
 
 
 
@@ -66,6 +68,13 @@ const formSchema = z.object({
     }).lte(100000, {
         message: "this stock is too big"
     }).nonnegative(),
+
+    /* 
+        Validate checkboxes
+    */
+    sizeOptions: z.array(z.string()).refine((value) => value.some((item) => item), {
+        message: "You have to select at least one item.",
+    }),
 })
 
 const EditFoodForm = ({ food } : { food: FoodInterface }) => {
@@ -78,7 +87,8 @@ const EditFoodForm = ({ food } : { food: FoodInterface }) => {
             category: food.category,
             cost: food.cost,
             price: food.price,
-            stocks: food.stocks
+            stocks: food.stocks,
+            sizeOptions: food.sizeOptions,
         },
         /* 
             This will enable you to see error messages 
@@ -100,7 +110,8 @@ const EditFoodForm = ({ food } : { food: FoodInterface }) => {
                 category: values.category,
                 cost: values.cost,
                 price: values.price,
-                stocks: values.stocks
+                stocks: values.stocks,
+                sizeOptions: values.sizeOptions,
             }
 
             // Update data to Firebase Realtime Database
@@ -121,7 +132,7 @@ const EditFoodForm = ({ food } : { food: FoodInterface }) => {
     return (
         <DialogContent className='sm:max-w-[425px] max-h-[600px] overflow-y-auto bg-main-dark text-gray-50 border-sub-dark'>
             <DialogHeader>
-                <DialogTitle>Edit Food</DialogTitle>
+                <DialogTitle>Edit Food Form</DialogTitle>
                 <DialogDescription className="text-gray-300">
                     Update the details of the selected food item...
                 </DialogDescription>
@@ -247,6 +258,58 @@ const EditFoodForm = ({ food } : { food: FoodInterface }) => {
                                 <FormDescription>
                                     Enter stocks available
                                 </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+
+                    {/* Food Sizes */}
+                    <FormField
+                        control={form.control}
+                        name="sizeOptions"
+                        render={() => (
+                            <FormItem>
+                                <div className="mb-4">
+                                    <FormLabel className="text-base">Size Options</FormLabel>
+                                    <FormDescription>
+                                        Select the size options for the food.
+                                    </FormDescription>
+                                </div>
+                                {sizes.map((size) => (
+                                    <FormField 
+                                        key={size.id}
+                                        control={form.control}
+                                        name="sizeOptions"
+                                        render={({ field }) => {
+                                            return (
+                                                <FormItem
+                                                    key={size.id}
+                                                    className="flex flex-row items-start space-x-3 space-y-0"
+                                                > 
+                                                    <FormControl>
+                                                    <Checkbox
+                                                        className="border-gray-500"
+                                                        checked={field.value?.includes(size.id)}
+                                                        onCheckedChange={(checked) => {
+                                                        return checked
+                                                            ? field.onChange([...field.value, size.id])
+                                                            : field.onChange(
+                                                                field.value?.filter(
+                                                                (value) => value !== size.id
+                                                                )
+                                                            )
+                                                        }}
+                                                    />
+                                                    </FormControl>
+                                                    <FormLabel className="font-normal">
+                                                        {size.label}
+                                                    </FormLabel>
+                                                </FormItem>
+                                            )
+                                        }}
+                                    />
+                                ))}
                                 <FormMessage />
                             </FormItem>
                         )}
