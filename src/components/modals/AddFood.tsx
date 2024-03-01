@@ -166,7 +166,7 @@ export function AddFoodForm() {
         
         <DialogContent className="sm:max-w-[425px] max-h-[600px] overflow-y-auto bg-main-dark text-gray-50 border-sub-dark">
             <DialogHeader>
-                <DialogTitle>Add New Food</DialogTitle>
+                <DialogTitle>Add New Food Form</DialogTitle>
                 <DialogDescription className="text-gray-300">
                     This form lets you to add a new food on your menu...
                 </DialogDescription>
